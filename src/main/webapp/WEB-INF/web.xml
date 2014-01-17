@@ -1,0 +1,55 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<display-name>My Web Application</display-name>
+	<filter>
+		<filter-name>ServletFilter</filter-name>
+		<filter-class>filter.ServletFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>GZipServletFilter</filter-name>
+		<display-name>GZipServletFilter</display-name>
+		<description></description>
+		<filter-class>filter.GZipServletFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ServletFilter</filter-name>
+		<url-pattern>/ServletForm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>GZipServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>ServletExample</servlet-name>
+		<servlet-class>servlet.ServletExample</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ServletGetPost</servlet-name>
+		<display-name>ServletGetPost</display-name>
+		<description></description>
+		<servlet-class>servlet.ServletGetPost</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ServletForm</servlet-name>
+		<display-name>ServletForm</display-name>
+		<description></description>
+		<servlet-class>servlet.ServletForm</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletExample</servlet-name>
+		<url-pattern>/ServletExample</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletGetPost</servlet-name>
+		<url-pattern>/ServletGetPost</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServletForm</servlet-name>
+		<url-pattern>/ServletForm</url-pattern>
+	</servlet-mapping>
+
+</web-app>

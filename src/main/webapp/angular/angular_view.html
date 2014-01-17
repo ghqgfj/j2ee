@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="../js/angular.js">
+	</script>
+	<style>
+	p
+	{
+		font-family:"Times New Roman";
+		font-size:20px;
+		color:blue;
+	}
+	</style>
+	<title>angular-view</title>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="MyController">
+		<span>{{myData.text}}</span></br>
+		<span>{{myData.textf()}}</span></br>
+		<span ng-bind="myData.bind"></span></br>
+		<span ng-bind="myData.html"></span></br>
+		<span ng-bind-html="myData.htmlUnsafe"></span></br>
+		<span ng-show="myData.showIt">show it</span></br>
+		<span ng-hide="myData.showIt">hide it</span></br>
+		<div ng-if="myData.showIt" style="color:blue;">ng-if Show it</div>
+		<span ng-repeat="(name,value) in myData.object">{{name}}={{value}}{{$index}}</br></span>		
+	</div>
+	<div ng-controller="MyController" ng-switch on="myData.switch">
+        <div ng-switch-when="1">Shown when switch is 1</div>
+        <div ng-switch-when="2">Shown when switch is 2</div>
+        <div ng-switch-default>Shown when switch is anything else than 1 and 2</div>
+		<ol>
+			<li ng-repeat="theItem in myData.items">{{theItem.text}}</li>
+		</ol>
+		<!--<div ng-include="'fragment1.html'"></div>-->
+    </div>  
+	<script>
+		angular.module("myapp",[])
+			.controller("MyController",function($scope){
+				$scope.myData={};
+				$scope.myData.text="This is mydata.text";
+				$scope.myData.textf=function() { return "A text from a function"; };
+				$scope.myData.bind="ng-bind=myData.bind";
+				$scope.myData.html="<p style=\"color:sienna;margin-left:20px;\">html escaped</p>";
+				$scope.myData.htmlUnsafe="<p style=\"color:sienna;margin-left:20px;\">html escaped</p>";
+				$scope.myData.showIt=true;
+				$scope.myData.switch="2";
+				$scope.myData.items = [ {text : "one"}, {text : "two"}, {text : "three"} ];
+				$scope.myData.object={one:"one",two:"two",three:"three"};
+			});
+	</script>
+</body>
+</html>

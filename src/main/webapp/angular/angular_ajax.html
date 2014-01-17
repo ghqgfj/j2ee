@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular_ajax</title>
+<script src="../js/angular.js">
+</script>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="MyController">
+		<button ng-click="myData.doClick(item,$event)">Send AJAX Request</button>
+		<br/>
+		<div ng-show="myData.showIt">Data from server: {{myData.fromServer.data}}</div>
+		<div ng-show="myData.showIt">Status from server: {{myData.fromServer.status}}</div>
+		<div ng-show="myData.showIt">Headers from server: {{myData.fromServer.headers}}</div>
+		<div ng-show="myData.showIt">Config: {{myData.fromServer.config}}</div>
+	</div>
+	<script>
+		angular.module("myapp",[])
+			.controller("MyController",function($scope,$http){
+  				$scope.myData={};
+ 				$scope.myData.showIt=false;
+  				$scope.myData.doClick=function(item,event){
+    				var responsePromise=$http.get("angularAjax.jsp");
+    				responsePromise.success(function(data,status,headers,config){
+      					$scope.myData.fromServer={};
+      					$scope.myData.fromServer.data=data.name;
+      					$scope.myData.fromServer.status=status;
+    					$scope.myData.fromServer.headers=headers;
+      					$scope.myData.fromServer.config=config;
+      					$scope.myData.showIt=true;
+    				})
+    				responsePromise.error(function(data,status,headers,config){
+      					alert("AJAX failed")
+    				})
+  				}
+			})
+	</script>
+</body>
+</html>

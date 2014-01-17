@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="../js/angular.js">
+	</script>
+</head>
+<body ng-app="myapp">
+	<div ng-controller="MyController">
+	<div ng-click="myData.doClick($event)">Click here</div>
+	<div>
+		<ul>
+			<li ng-repeat="item in myData.items" ng-click="myData.clickLi(item, $event)">Click Li</li>
+		</ul>
+	</div>
+	</div>
+	<script>
+    angular.module("myapp", [])
+            .controller("MyController", function($scope) {
+                $scope.myData = {};
+				$scope.myData.doClick=function(event){
+					alert("clicked: " + event.clientX + ": " + event.clientY);
+				};
+				$scope.myData.items = [{ v: "1"}, { v: "2"}, { v : "3"} ];
+				$scope.myData.clickLi=function(item,event){
+					alert("clicked: " + event.clientX + ": " + event.clientY+":"+item.v);
+				};
+            } );
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>servelt form data</title>
+</head>
+<body>
+<form action="ServletForm" method="POST" target="_blank">
+
+<h3>CheckBox</h3>
+<input type="checkbox" name="maths" checked="checked" /> Maths
+<input type="checkbox" name="physics"  /> Physics
+<input type="checkbox" name="chemistry" checked="checked" />Chemistry
+<input type="submit" value="Select Subject" />
+</form>
+<h2>Forward to Index.jsp</h2>
+<form action="ServletForm" method="GET" target="_blank">
+
+<h3>CheckBox</h3>
+<input type="checkbox" name="maths" checked="checked" /> Maths
+<input type="checkbox" name="maths"  /> Physics
+<input type="checkbox" name="maths" checked="checked" />Chemistry
+<input type="submit" value="Select Subject" />
+</form>
+
+<h2>Test the Filter</h2>
+<form action="ServletForm" method="GET" target="_blank">
+
+<h3>CheckBox</h3>
+<input type="radio" name="block" value="on"/>block
+<input type="radio" name="block" value="off"/>unblock
+<input type="checkbox" name="maths" checked="checked" />Chemistry
+<input type="submit" value="Select Subject" />
+</form>
+</body>
+</html>
