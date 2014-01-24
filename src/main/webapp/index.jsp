@@ -25,6 +25,7 @@ while(headerNames.hasMoreElements()) {
    String paramValue = request.getHeader(paramName);
    out.println("<td> " + paramValue + "</td></tr>\n");
 }
+request.getSession().setAttribute("visitCount", 0);
 %>
 </table>
 <h2>Bean Information</h2>

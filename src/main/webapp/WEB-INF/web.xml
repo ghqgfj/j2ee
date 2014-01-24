@@ -4,6 +4,13 @@
 
 <web-app>
 	<display-name>My Web Application</display-name>
+	<context-param>		
+		<param-name>file-upload</param-name>
+		<param-value>
+			C:\Users\qiannjin\workspace\data\
+		</param-value>
+		<description>Location to store uploaded file</description>
+	</context-param>
 	<filter>
 		<filter-name>ServletFilter</filter-name>
 		<filter-class>filter.ServletFilter</filter-class>
@@ -23,6 +30,11 @@
 		<filter-name>GZipServletFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<servlet>
+		<servlet-name>SessionTrack</servlet-name>
+		<servlet-class>servlet.SessionTrack</servlet-class>
+	</servlet>
 	<servlet>
 		<servlet-name>ServletExample</servlet-name>
 		<servlet-class>servlet.ServletExample</servlet-class>
@@ -39,6 +51,19 @@
 		<description></description>
 		<servlet-class>servlet.ServletForm</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ErrorHandler</servlet-name>
+		<display-name>ErrorHandler</display-name>
+		<description>ErrorHandler</description>
+		<servlet-class>servlet.ErrorHandler</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<display-name>UploadServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.UploadServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>ServletExample</servlet-name>
 		<url-pattern>/ServletExample</url-pattern>
@@ -51,5 +76,28 @@
 		<servlet-name>ServletForm</servlet-name>
 		<url-pattern>/ServletForm</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ErrorHandler</servlet-name>
+		<url-pattern>/ErrorHandler</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SessionTrack</servlet-name>
+		<url-pattern>/SessionTrack</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ErrorHandler</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/ErrorHandler</location>
+	</error-page>
 
 </web-app>
