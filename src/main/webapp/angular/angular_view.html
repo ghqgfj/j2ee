@@ -15,15 +15,15 @@
 </head>
 <body ng-app="myapp">
 	<div ng-controller="MyController">
-		<span>{{myData.text}}</span></br>
-		<span>{{myData.textf()}}</span></br>
-		<span ng-bind="myData.bind"></span></br>
-		<span ng-bind="myData.html"></span></br>
-		<span ng-bind-html="myData.htmlUnsafe"></span></br>
-		<span ng-show="myData.showIt">show it</span></br>
-		<span ng-hide="myData.showIt">hide it</span></br>
+		<span>{{myData.text}}</span><br/>
+		<span>{{myData.textf()}}</span><br/>
+		<span ng-bind="myData.bind"></span><br/>
+		<span ng-bind="myData.html"></span><br/>
+		<span ng-bind-html="myData.htmlUnsafe"></span><br/>
+		<span ng-show="myData.showIt">show it</span><br/>
+		<span ng-hide="myData.showIt">hide it</span><br/>
 		<div ng-if="myData.showIt" style="color:blue;">ng-if Show it</div>
-		<span ng-repeat="(name,value) in myData.object">{{name}}={{value}}{{$index}}</br></span>		
+		<span ng-repeat="(name,value) in myData.object">{{name}}={{value}}{{$index}}<br/></span>		
 	</div>
 	<div ng-controller="MyController" ng-switch on="myData.switch">
         <div ng-switch-when="1">Shown when switch is 1</div>
