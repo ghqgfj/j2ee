@@ -76,8 +76,8 @@ public class ServletForm extends HttpServlet {
         }
         out.println("<table><tr bgcolor=\"#949494\"><th>Parameter Name</th><th>Parameter Value(s)</th></tr>");
         Enumeration parameter = request.getParameterNames();
-        while(attritue.hasMoreElements()) {
-           String paramName = (String)attritue.nextElement();
+        while(parameter.hasMoreElements()) {
+           String paramName = (String)parameter.nextElement();
            out.print("<tr><td>" + paramName + "</td>\n");
            String paramValue = request.getParameter(paramName);
            out.println("<td> " + paramValue + "</td></tr>\n");
