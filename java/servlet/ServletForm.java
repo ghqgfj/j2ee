@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,6 +52,7 @@ public class ServletForm extends HttpServlet {
         "<!doctype html public \"-//w3c//dtd html 4.0 " +
         "transitional//en\">\n";
         out.println(request.getRemoteAddr());
+        
         out.println(docType +
                   "<html>\n" +
                   "<head><title>" + title + "</title></head>\n" +
@@ -63,8 +65,25 @@ public class ServletForm extends HttpServlet {
                   + request.getParameter("physics") + "\n" +
                   "  <li><b>Chemistry Flag: </b>: "
                   + request.getParameter("chemistry") + "\n" +
-                  "</ul>\n" +
-                  "</body></html>");
+                  "</ul>\n");
+        out.println("<table><tr bgcolor=\"#949494\"><th>Attribute Name</th><th>Attribute Value(s)</th></tr>");
+        Enumeration attritue = request.getAttributeNames();
+        while(attritue.hasMoreElements()) {
+           String paramName = (String)attritue.nextElement();
+           out.print("<tr><td>" + paramName + "</td>\n");
+           String paramValue = request.getAttribute(paramName).toString();
+           out.println("<td> " + paramValue + "</td></tr>\n");
+        }
+        out.println("<table><tr bgcolor=\"#949494\"><th>Parameter Name</th><th>Parameter Value(s)</th></tr>");
+        Enumeration parameter = request.getParameterNames();
+        while(parameter.hasMoreElements()) {
+           String paramName = (String)parameter.nextElement();
+           out.print("<tr><td>" + paramName + "</td>\n");
+           String paramValue = request.getParameter(paramName);
+           out.println("<td> " + paramValue + "</td></tr>\n");
+        }
+        out.println("</table>");
+        out.println("</body></html>");
     }
 
 }
