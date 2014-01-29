@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form Data Binding</title>
+<style>
+    .fieldValid {
+        border: 1px solid #00ff00;
+    }
+    .fieldInvalid {
+        border: 1px solid #ff0000;
+    }
+</style>
+<script src="../js/angular.js">
+</script>
+</head>
+<body ng-app="myapp">
+<div ng-controller="MyController">
+  <form>
+    <input type="text" name="firstName" ng-model="myForm.firstName">First name<br/>
+    <input type="text" name="lastName" ng-model="myForm.lastName">Last name<br/>
+    <input type="checkbox" ng-model="myForm.checkBox" ng-true-value="checked" ng-false-value="unchecked">check box<br/>
+    <input type="radio" ng-model="myForm.radio" value="weeklyNews">weeklyNews
+    <input type="radio" ng-model="myForm.radio" value="monthlyNews">monthlyNews<br/>
+    <input type="text" id="name" ng-model="myForm.name" ng-minlength="5" ng-maxlength="12"> Name 
+    <select ng-model="myForm.car">
+            <option value="nissan">Nissan</option>
+            <option value="toyota">Toyota</option>
+            <option value="fiat">Fiat</option>
+     </select>
+     <input type="text" id="name" ng-model="myForm.name" ng-pattern="/^\d+$/"> Name <br/>
+  </form>
+  <div>
+    FirstName:{{myForm.firstName}}<br/>
+    LastName:{{myForm.lastName}}<br/>
+    CheckBox:{{myForm.checkBox}}<br/>
+    Radio:{{myForm.radio}}<br/>
+    Select:{{myForm.car}}<br/>
+    Name:{{myForm.name}}<br/>
+  </div>
+  <h2>angular create options for a select</h2>
+  <div>
+  <form>
+  	<select multiple="true" ng-model="myForm.vehicle" ng-options="obj.id as obj.name for obj in myForm.options">
+  	<option value="">Please choose a car</option>
+  	</select>
+  	Select:{{myForm.vehicle}}<br/>
+  </form>
+  </div>
+  <div>
+    <form name="myFormNg" ng-submit="myForm.submitTheForm()">
+    <input type="text" ng-class="myForm.getFormFieldCssClass(myFormNg.name)" id="name" name="name" ng-model="myForm.name" ng-minlength="2">Name<br/>
+    <input type="radio" ng-model="myForm.radio" value="weeklyNews">weeklyNews
+    <input type="radio" ng-model="myForm.radio" value="monthlyNews">monthlyNews<br/>
+    <div ng-show="myFormNg.name.$invalid">
+        You must enter a valid name.
+    </div>
+    <input type="submit" value="Submit Form">
+    </form>
+  </div>
+</div>
+<script>
+  angular.module("myapp",[])
+    .controller("MyController",function($scope,$http){
+      $scope.myForm={};
+      $scope.myForm.name="";
+      $scope.myForm.firstName="Jin";
+      $scope.myForm.lastName="Qian";
+      $scope.myForm.car  = "fiat";
+      $scope.myForm.vechicle=["nissan"];
+      $scope.myForm.options=[{ id : "nissan", name: "Nissan" }
+      ,{ id : "toyota", name: "Toyota" }
+      ,{ id : "fiat"  , name: "Fiat" }];
+      $scope.myForm.getFormFieldCssClass=function(ngModelController){
+        if(ngModelController.$pristine)return "";
+        return ngModelController.$valid? "fieldValid":"fieldInvalid";
+      };
+      $scope.myForm.submitTheForm=function(item,event){       
+        var dataObject={
+            name:$scope.myForm.name,
+            news:$scope.myForm.radio,
+        };
+       
+        var response=$http.post("../ServletForm", dataObject,{'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
+        response.success(function(dataFromServer,status,headers,config){
+          console.log(dataFromServer);
+        });
+        response.error(function(data,status,headers,config){
+          alert("Submitting form failed!");
+        });
+      };
+    })
+  
+</script>
+</body>
+</html>
