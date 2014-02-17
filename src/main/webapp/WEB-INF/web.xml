@@ -1,24 +1,22 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
 	<display-name>My Web Application</display-name>
 	<context-param>		
 		<param-name>file-upload</param-name>
 		<param-value>
 			C:\Users\qiannjin\workspace\data\
 		</param-value>
-		<description>Location to store uploaded file</description>
+		
 	</context-param>
 	<filter>
 		<filter-name>ServletFilter</filter-name>
 		<filter-class>filter.ServletFilter</filter-class>
 	</filter>
 	<filter>
-		<filter-name>GZipServletFilter</filter-name>
-		<display-name>GZipServletFilter</display-name>
-		<description></description>
+		<filter-name>GZipServletFilter</filter-name>		
 		<filter-class>filter.GZipServletFilter</filter-class>
 	</filter>
 
@@ -44,27 +42,20 @@
 		<servlet-class>servlet.ServletExample</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>ServletGetPost</servlet-name>
-		<display-name>ServletGetPost</display-name>
-		<description></description>
+		<servlet-name>ServletGetPost</servlet-name>	
+		
 		<servlet-class>servlet.ServletGetPost</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>ServletForm</servlet-name>
-		<display-name>ServletForm</display-name>
-		<description></description>
 		<servlet-class>servlet.ServletForm</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>ErrorHandler</servlet-name>
-		<display-name>ErrorHandler</display-name>
-		<description>ErrorHandler</description>
+		<servlet-name>ErrorHandler</servlet-name>		
 		<servlet-class>servlet.ErrorHandler</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>UploadServlet</servlet-name>
-		<display-name>UploadServlet</display-name>
-		<description></description>
+		<servlet-name>UploadServlet</servlet-name>		
 		<servlet-class>servlet.UploadServlet</servlet-class>
 	</servlet>
 

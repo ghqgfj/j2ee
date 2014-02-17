@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>custom directives</title>
+<script src="../js/angular.js">
+</script>
+</head>
+<body ng-app="myapp">
+<h2> use template to register a directive</h2>
+<div ng-controller="MyController">	
+	<userinfo>This div will be replaced</userinfo>
+	<ss user="qq" kaldflsa="textToInsert">show the fragment html</ss>
+	<compile>compile</compile>
+</div>
+<script>
+	myapp=angular.module("myapp",[]);	
+	myapp.directive('userinfo',function(){
+  		var directive={};
+ 		directive.restrict='E';
+ 		directive.templateUrl="fragment1.html";
+		return directive;
+	});
+	myapp.directive('ss',function(){
+  		var directive={};
+ 		directive.restrict='E';
+ 		directive.template="User : {{user.firstName}} {{user.lastName}} {{textToInsert}}";
+ 		directive.scope={
+     		user:"=user",
+     		textToInsert:"=kaldflsa"    				
+ 		} 		
+		return directive;
+	});
+	myapp.directive('compile', function() {
+  		var directive = {};
+  		directive.restrict = 'E'; /* restrict this directive to elements */
+  		directive.compile = function(element, attributes) {
+      	element.css("border", "1px solid #cccccc");
+      	var linkFunction = function($scope, element, attributes) {
+          element.html("This is the new content: " + $scope.firstName);
+          element.css("background-color", "#ffff00");
+      }
+      return linkFunction;
+  	}
+  	return directive;
+	});
+	myapp.controller("MyController",function($scope,$http){
+  		$scope.myData={};  		
+  		$scope.qq={};
+  		$scope.textToInsert="text in global scope";
+  		$scope.qq.firstName="first name";
+  		$scope.qq.lastName="last name";
+  		$scope.cssClass = "notificationDiv";
+  		$scope.firstName = "aaaaa";
+	});
+</script>
+</body>
+</html>
