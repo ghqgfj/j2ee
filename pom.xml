@@ -12,9 +12,15 @@
 		<spring-ws-version>2.2.0.RELEASE</spring-ws-version>
 		<spring-oxm-version>4.0.5.RELEASE</spring-oxm-version>
 		<spring-test-version>4.1.4.RELEASE</spring-test-version>
+		<mongo-driver-version>2.13.0-rc1</mongo-driver-version>
 		<junit-version>4.11</junit-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongo-driver-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>

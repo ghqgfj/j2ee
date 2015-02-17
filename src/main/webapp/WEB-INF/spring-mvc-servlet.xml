@@ -10,6 +10,26 @@
                            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan base-package="spring*" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+	<bean
+		class="org.springframework.ws.transport.http.WebServiceMessageReceiverHandlerAdapter">
+		<property name="messageFactory" ref="messageFactory" />
+	</bean>	
+	<bean id="messageDispatcher"
+		class="org.springframework.ws.soap.server.SoapMessageDispatcher" />
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<bean
+		class="org.springframework.ws.transport.http.WsdlDefinitionHandlerAdapter" />
 	<bean id="person"
 		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition"
 		p:portTypeName="Person" p:locationUri="/spring-ws/person"
@@ -18,7 +38,14 @@
 			<bean class="org.springframework.xml.xsd.SimpleXsdSchema" p:xsd="classpath:/person.xsd" />
 		</property>
 	</bean>
-
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="*.wsdl">person</prop>
+			</props>
+		</property>
+		<property name="defaultHandler" ref="messageDispatcher" />
+	</bean>
 	<bean
 		class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
 		<description>An endpoint mapping strategy that looks for @Endpoint and
@@ -36,5 +63,4 @@
 
 	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
 		p:contextPath="springws" />
-
 </beans>
