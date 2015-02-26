@@ -10,12 +10,37 @@
 	<properties>
 		<jetty-version>9.2.2.v20140723</jetty-version>
 		<spring-ws-version>2.2.0.RELEASE</spring-ws-version>
-		<spring-oxm-version>4.0.5.RELEASE</spring-oxm-version>
+		<spring-version>4.0.5.RELEASE</spring-version>
 		<spring-test-version>4.1.4.RELEASE</spring-test-version>
 		<mongo-driver-version>2.13.0-rc1</mongo-driver-version>
 		<junit-version>4.11</junit-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
@@ -30,7 +55,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
-			<version>${spring-oxm-version}</version>
+			<version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
