@@ -9,5 +9,7 @@
 <body>
   <div>Hello ${user.name}</div>
   <div>Your personal message is: ${user.message}</div>
+  <div>Employee Id: ${employeeId}</div>
+  <div>Department Id:${departmentId}</div>
 </body>
 </html>
