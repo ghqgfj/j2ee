@@ -9,7 +9,6 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 @Endpoint
 public class PersonEndpoint implements MarshallingPersonService {
 
-	@Override
 	@PayloadRoot(localPart = GET_PERSONS_REQUEST, namespace = NAMESPACE)
 	public PersonResponse getPersons(GetPersonsRequest request) {
 		List<Person> persons = new ArrayList<Person>();

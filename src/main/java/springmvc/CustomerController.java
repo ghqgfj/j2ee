@@ -23,11 +23,12 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping("/customer")
 public class CustomerController {
 	CustomerValidator customerValidator;
-	 
+
 	@Autowired
-	public CustomerController(CustomerValidator customerValidator){
+	public CustomerController(CustomerValidator customerValidator) {
 		this.customerValidator = customerValidator;
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String initForm(ModelMap model) {
 
@@ -46,12 +47,16 @@ public class CustomerController {
 	public String processSubmit(@ModelAttribute("customer") Customer customer,
 			BindingResult result, SessionStatus status) {
 
-		// clear the command object from the session
-		status.setComplete();
+		customerValidator.validate(customer, result);
 
-		// return form success view
-		return "CustomerSuccess";
-
+		if (result.hasErrors()) {
+			// if validator failed
+			return "CustomerForm";
+		} else {
+			status.setComplete();
+			// form success
+			return "CustomerSuccess";
+		}
 	}
 
 	@ModelAttribute("webFrameworkList")
@@ -67,49 +72,52 @@ public class CustomerController {
 
 		return webFrameworkList;
 	}
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
- 
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, true));
 	}
+
 	@ModelAttribute("numberList")
 	public List<String> populateNumberList() {
- 
-		//Data referencing for number radiobuttons
+
+		// Data referencing for number radiobuttons
 		List<String> numberList = new ArrayList<String>();
 		numberList.add("Number 1");
 		numberList.add("Number 2");
 		numberList.add("Number 3");
 		numberList.add("Number 4");
 		numberList.add("Number 5");
- 
+
 		return numberList;
 	}
- 
+
 	@ModelAttribute("javaSkillsList")
-	public Map<String,String> populateJavaSkillList() {
- 
-		//Data referencing for java skills list box
-		Map<String,String> javaSkill = new LinkedHashMap<String,String>();
+	public Map<String, String> populateJavaSkillList() {
+
+		// Data referencing for java skills list box
+		Map<String, String> javaSkill = new LinkedHashMap<String, String>();
 		javaSkill.put("Hibernate", "Hibernate");
 		javaSkill.put("Spring", "Spring");
 		javaSkill.put("Apache Wicket", "Apache Wicket");
 		javaSkill.put("Struts", "Struts");
- 
+
 		return javaSkill;
 	}
- 
+
 	@ModelAttribute("countryList")
-	public Map<String,String> populateCountryList() {
- 
-		//Data referencing for java skills list box
-		Map<String,String> country = new LinkedHashMap<String,String>();
+	public Map<String, String> populateCountryList() {
+
+		// Data referencing for java skills list box
+		Map<String, String> country = new LinkedHashMap<String, String>();
 		country.put("US", "United Stated");
 		country.put("CHINA", "China");
 		country.put("SG", "Singapore");
 		country.put("MY", "Malaysia");
- 
+
 		return country;
 	}
 }

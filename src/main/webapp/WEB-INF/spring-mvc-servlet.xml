@@ -11,12 +11,18 @@
                            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan base-package="spring*" />
-	<mvc:annotation-driven/>
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">  
-        <property name="order" value="0"/>  
-        <property name="useDefaultSuffixPattern" value="false"/>  
-    </bean>
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="order" value="0" />
+		<property name="useDefaultSuffixPattern" value="false" />
+	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="classpath:Customer" />
+	</bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -30,7 +36,7 @@
 	<bean
 		class="org.springframework.ws.transport.http.WebServiceMessageReceiverHandlerAdapter">
 		<property name="messageFactory" ref="messageFactory" />
-	</bean>	
+	</bean>
 	<bean id="messageDispatcher"
 		class="org.springframework.ws.soap.server.SoapMessageDispatcher" />
 	<bean
